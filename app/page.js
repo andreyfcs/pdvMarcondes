@@ -1,10 +1,8 @@
 import Image from "next/image";
+import Navbar from "./Navbar";
 
 export default function Home() {
-  return (
-    <div className="bg-black text-white">
-<h1>Fala Marcondes</h1> 
-    </div>
-    
-  );
+  return (    
+  <Navbar />
+); 
 }
