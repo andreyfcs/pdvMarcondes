@@ -1,8 +1,10 @@
-export default function Dashboard() {
-    return ( // é importante o conteudo está dentro de uma div
-        <div> 
-            <h2>Dashboard</h2>
-            <p>está localizado na pasta components/dashboard.js</p>
-        </div>
+"use client"
+import Link from "next/link"
+
+const Dashboard = () => {
+    return (
+<h1>olá</h1>
     );
-}
+};
+
+export default Dashboard;   
