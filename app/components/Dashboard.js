@@ -1,7 +1,7 @@
 // app/products/page.js
 export default async function Products() {
     // Faz a requisição para a API
-    const res = await fetch('http://localhost:3001/api/products');
+    const res = await fetch('http://localhost:3000/api/products');
     
     // Converte a resposta para JSON
     const products = await res.json();
