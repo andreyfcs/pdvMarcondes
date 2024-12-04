@@ -18,19 +18,12 @@ const PDV = () => {
     const newTotal = cart.reduce((acc, item) => acc + item.quantity * item.price, 0);
     setTotal(newTotal);
   }, [cart]);
-
-  // Adiciona um produto ao carrinho
+   
+  // Adiciona um produto ao carrinho 
   const addToCart = (product) => {
-    const existingItem = cart.find((item) => item.id === product.id);
-    if (existingItem) {
-      setCart(
-        cart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        )
-      );
-    } else {
+
       setCart([...cart, { ...product, quantity: 1 }]);
-    }
+
   };
 
   // Registra a venda (envia para a API `sales`)
@@ -49,15 +42,13 @@ const PDV = () => {
   };
 
   return (
-    <div>
-      <h1>PDV - Frente de Caixa</h1>
-      
+    <div>  
       <div className=
-      "w-72 h-72 border-2 border-gray-400 overflow-y-auto p-4 mt-4"
+      "w-96 h-72 border-2 border-gray-400 overflow-y-auto p-4 mt-4 m-5 "
       >
         <h2>Carrinho</h2>
         {cart.length > 0 ? (
-          <div className="max-h-96 overflow-y-auto">
+          <div>
             <table className="w-full">
               <thead>
                 <tr>
@@ -68,8 +59,8 @@ const PDV = () => {
                 </tr>
               </thead>
               <tbody>
-                {cart.map((item) => (
-                  <tr key={item.id}>
+                {cart.map((item, index) => (
+                  <tr key={`${item.id}-${index}`}> 
                     <td>{item.name}</td>
                     <td>{item.quantity}</td>
                     <td>R${Number(item.price).toFixed(2)}</td>
@@ -82,20 +73,19 @@ const PDV = () => {
         ) : (
           <p>O carrinho está vazio.</p>
         )}
-        <h3>Total: R${total.toFixed(2)}</h3>
-        <button onClick={registerSale} className="bg-blue-500 text-white py-2 px-4 rounded mt-4">
-          Registrar Venda
-        </button>
       </div>
-
-      <h2>Produtos Disponíveis</h2>
-      <div>
+      <h3 className="m-5">Total: R${total.toFixed(2)}</h3>
+      <button onClick={registerSale} className="bg-blue-950  text-white py-2 px-4 rounded mt-1 m-5">
+          Registrar Venda
+      </button>
+      <h2 className="text-center">Produtos Disponíveis</h2>
+      <div className="flex justify-between p-2">
         {products.map((product) => (
           <div key={product.id} className="mb-4">
             <p>{product.name} - R${Number(product.price).toFixed(2)}</p>
             <button
               onClick={() => addToCart(product)}
-              className="bg-green-500 text-white py-1 px-3 rounded"
+              className="bg-slate-500 text-white py-1 px-3 rounded"
             >
               Adicionar ao Carrinho
             </button>
