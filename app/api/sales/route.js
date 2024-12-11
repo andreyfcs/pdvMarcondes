@@ -26,13 +26,18 @@ import db from '../../lib/db';  // Verifique o caminho correto
        
   
       // 2. Valide os dados
-      const { sale_date, total  = 0 } = body;
-      if (!sale_date || !total) {
+      let { sale_date, total  = 0 } = body;
+      if (total == null) {
         return NextResponse.json(
           { message: 'Campos obrigatórios estão faltando.' },
           { status: 400 }
         );
       }
+
+          // Se o sale_date não for informado, atribui a data atual
+      if (!sale_date) {
+      sale_date = new Date().toISOString().slice(0, 19).replace('T', ' '); // Formato: YYYY-MM-DD HH:MM:SS
+    }
   
       // 3. Insira os dados no banco
       const result = await db.query('INSERT INTO sales (sale_date, total) VALUES (?, ?)', [sale_date, total]);
