@@ -34,7 +34,7 @@ import db from '../../lib/db';  // Verifique o caminho correto
         );
       }
 
-          // Se o sale_date não for informado, atribui a data atual
+      // Se o sale_date não for informado, atribui a data atual
       if (!sale_date) {
       sale_date = new Date().toISOString().slice(0, 19).replace('T', ' '); // Formato: YYYY-MM-DD HH:MM:SS
     }
