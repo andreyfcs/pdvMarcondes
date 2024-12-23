@@ -1,15 +1,19 @@
 'use client'
 import Image from "next/image";
-import Navbar from "./components/Navbar";
-import PDV from "./components/PDV";
+import PDVView from "./components/PDVView";
+import PDVController from "./components/PDVController";
+
+
 
 //import Products from "./api/Products";
 
 export default function Home() {
   return (    
     <div> 
-  <Navbar />
-  <PDV />
+
+  <PDVView />
+
+
     </div>
 
 ); 

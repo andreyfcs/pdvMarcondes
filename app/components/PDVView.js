@@ -1,92 +1,31 @@
-import { useState, useEffect } from 'react';
 import { FaPlus } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";  
+import { RiSubtractFill } from "react-icons/ri";
+import { PDVController } from './PDVController';
+import React, { useState } from "react";
 
-const PDV = () => {
-  const [products, setProducts] = useState([]); // Lista de produtos do banco
-  const [cart, setCart] = useState([]); // Carrinho do cliente
-  const [total, setTotal] = useState(0); // Total da compra
-  const [activeButton, setActiveButton] = useState(null); // Estado do botão ativo
-  const [inputValue, setInputValue] = useState(''); // Estado do input
+const PDVView = () => {
+  const {
+    buttons,
+    activeButton,
+    toggleButton,
+    inputValue,
+    setInputValue,
+    handleConfirm,
+    products,
+    cart,
+    total,
+    addToCart,
+    registerSale,
+    removeFromCart,
+    discount,
+    applyDiscount,
+    totalWithDiscount,
+  } = PDVController();
 
-  // Lista de botões com rótulos
-  const buttons = [
-    { 
-      id: 1, 
-      label: 'Pesquisar', 
-      subButtons: [
-        { id: 1, label: 'Pesquisar' }, 
-        
-      ]
-    },
- /*   { 
-      id: 2, 
-      label: 'Remover', 
-      subButtons: [
-        { id: 2, label: 'Remover', label: 'Quantidade' }, 
-      ]
-    },*/
-    { 
-      id: 3, 
-      label: 'Estoque',
-      subButtons: [
-        { id: 3.1, label: 'Adicionar ao Estoque' },
-        { id: 3.2, label: 'Ver Estoque' }
-      ]
-    },
-    { id: 4, label: 'Registros' },
-    { id: 5, label: 'Desconto' }
-  ];
-  
-
-  // Alterna o estado do botão ativo
-  const toggleButton = (id) => {
-    setActiveButton(activeButton === id ? null : id); // Desativa se já estiver ativo
-  };
-
-  // Função para lidar com a confirmação
-  const handleConfirm = () => {
-    alert(`Botão: ${buttons.find((b) => b.id === activeButton).label}, Valor: ${inputValue}`);
-    setInputValue(''); // Limpa o input após confirmar
-  };
-
-  // Carrega os produtos disponíveis ao iniciar a venda
-  useEffect(() => {
-    fetch('/api/products')
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error('Erro ao carregar produtos:', err));
-  }, []);
-
-  // Atualiza o total sempre que o carrinho mudar
-  useEffect(() => {
-    const newTotal = cart.reduce((acc, item) => acc + item.quantity * item.price, 0);
-    setTotal(newTotal);
-  }, [cart]);
-   
-  // Adiciona um produto ao carrinho 
-  const addToCart = (product) => {
-    setCart([...cart, { ...product, quantity: 1 }]);
-  };
-
-  // Registra a venda (envia para a API `sales`)
-  const registerSale = () => {
-    fetch('/api/sales', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: cart, total }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert('Venda registrada com sucesso!');
-        setCart([]); // Limpa o carrinho após registrar
-      })
-      .catch((err) => console.error('Erro ao registrar venda:', err));
-  };
+  const [discountInput, setDiscountInput] = useState("");
 
   return (
     <div className="bg-[#8aaaaa] flex flex-wrap justify-center space-y-4 lg:space-y-0 h-screen border-2 border-blue-600">
-      
       {/* Div do Carrinho */}
       <div className="w-full lg:w-[48%]">
         <div className="h-72 border-2 border-[#1b303b] overflow-y-auto p-4 mt-4 lg:mr-5">
@@ -108,6 +47,10 @@ const PDV = () => {
                       <td>{item.quantity}</td>
                       <td>R${Number(item.price).toFixed(2)}</td>
                       <td>R${(item.quantity * item.price).toFixed(2)}</td>
+                      <button
+                      onClick={() => removeFromCart(item.id)}
+                      
+                      ><RiSubtractFill /></button>
                     </tr>
                   ))}
                 </tbody>
@@ -116,15 +59,38 @@ const PDV = () => {
           ) : (
             <p>O carrinho está vazio.</p>
           )}
+
+          {/* Total + Registrar Venda */}
+          </div>
+          <h3 className="mt-5 text-[40px]">Total: R${total.toFixed(2)}</h3>
+          <h3 className="mt-5 text-[40px]">Total com desconto: R${totalWithDiscount().toFixed(2)}</h3>
+          <button
+            onClick={registerSale}
+            className="
+            bg-[#1b303b] text-white py-2 px-4 rounded mt-1 w-full lg:w-auto 
+            inline-flex items-center space-x-2"
+          >
+            Registrar
+          </button>          
           
-          {/* Total + Registrar Venda */} 
-      </div>
-         <h3 className="mt-5 text-[40px]">Total: R${total.toFixed(2)}</h3>
-          <button onClick={registerSale} className="
-          bg-[#1b303b] text-white py-2 px-4 rounded mt-1 w-full lg:w-auto
-          inline-flex items-center space-x-2">
-          Registrar Venda
+          {/* Botão de Desconto */}
+          <div className="mt-4">
+          <input
+          type="number"
+          value={discountInput}
+          onChange={(e) => setDiscountInput(e.target.value)}
+          placeholder="Valor do desconto"
+          className="border p-2 rounded w-full max-w-xs"
+          />
+          <button
+            onClick={() => applyDiscount(discountInput)}
+            className="
+            bg-[#1b303b] text-white py-2 px-4 rounded mt-1 w-full lg:w-auto 
+            inline-flex items-center space-x-2"
+            >
+            Aplicar Desconto
           </button>
+        </div>
       </div>
 
       {/* Div dos Produtos Disponíveis */}
@@ -132,7 +98,6 @@ const PDV = () => {
         <div className="p-4">
           <div className="flex flex-wrap gap-2">
             {buttons.map((button) => (
-              
               <button
                 key={button.id}
                 onClick={() => toggleButton(button.id)}
@@ -162,21 +127,21 @@ const PDV = () => {
                 className="bg-blue-500 text-white py-2 px-4 rounded"
               >
                 Confirmar
-              </button>
+              </button>   
             </div>
           )}
         </div>
-
-
 
         {/* Container de Produtos */}
         <div className="h-72 border-2 border-[#1b303b] overflow-y-auto p-4 mt-4 ml-0">
           {products.map((product) => (
             <div key={product.id} className="mb-4 flex justify-between items-start gap-4">
               <p>{product.name} - R${Number(product.price).toFixed(2)}</p>
+              <span className="text-gray-600 ml-2">Estoque: {product.stock}</span>
               <button
                 onClick={() => addToCart(product)}
-                className="">
+                className=""
+              >
                 <FaPlus />
               </button>
             </div>
@@ -187,4 +152,4 @@ const PDV = () => {
   );
 };
 
-export default PDV;
+export default PDVView;

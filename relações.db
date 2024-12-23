@@ -1,0 +1,94 @@
+Aqui está a descrição das relações entre as tabelas products, sales e sale_items para seu PDV. Essas relações representam um modelo de banco de dados com foco em registrar vendas, associar produtos às vendas e detalhar os itens vendidos.
+Relações e Atributos
+1. Tabela products
+
+Armazena informações sobre os produtos disponíveis.
+
+Campo	Tipo	Descrição
+id	INT (PK)	Identificador único do produto.
+name	VARCHAR	Nome do produto.
+price	DECIMAL	Preço unitário do produto.
+stock	INT	Quantidade disponível em estoque.
+2. Tabela sales
+
+Armazena informações sobre cada venda.
+Campo	Tipo	Descrição
+id	INT (PK)	Identificador único da venda.
+sale_date	DATETIME	Data e hora da venda.
+total_amount	DECIMAL	Valor total da venda.
+3. Tabela sale_items
+
+Relaciona os produtos com as vendas, armazenando detalhes sobre os itens vendidos em cada transação.
+Campo	Tipo	Descrição
+id	INT (PK)	Identificador único do item.
+sale_id	INT (FK)	Referência à venda (Tabela sales).
+product_id	INT (FK)	Referência ao produto (Tabela products).
+quantity	INT	Quantidade do produto vendido.
+subtotal	DECIMAL	Subtotal para o produto (preço unitário × quantidade).
+Relacionamentos
+
+    products ↔ sale_items:
+        Tipo: 1:N (Um produto pode aparecer em vários itens de vendas).
+        Chave Estrangeira (FK): sale_items.product_id → products.id.
+
+    sales ↔ sale_items:
+        Tipo: 1:N (Uma venda pode ter vários itens).
+        Chave Estrangeira (FK): sale_items.sale_id → sales.id.
+
+Regras e Considerações
+
+    Integridade Referencial:
+        A coluna sale_items.product_id deve ter uma chave estrangeira que referencia products.id.
+        A coluna sale_items.sale_id deve ter uma chave estrangeira que referencia sales.id.
+
+    Cálculos Automáticos:
+        O campo subtotal em sale_items deve ser calculado como products.price * sale_items.quantity.
+        O campo total_amount em sales deve ser a soma de todos os subtotais dos itens relacionados.
+
+    Manutenção de Estoque:
+        Quando um produto for adicionado a uma venda, o campo stock na tabela products deve ser decrementado pelo valor de quantity correspondente.
+
+SQL para Criar as Relações
+
+Aqui está o SQL para definir as tabelas e suas relações:
+
+-- Tabela products
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL
+);
+
+-- Tabela sales
+CREATE TABLE sales (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sale_date DATETIME NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL
+);
+
+-- Tabela sale_items
+CREATE TABLE sale_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sale_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    subtotal DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+Diagrama ER (Entidade-Relacionamento)
+
+No seu diagrama, você terá:
+
+    Entidades:
+        Products
+        Sales
+        Sale_Items
+
+    Relacionamentos:
+        Products possui um relacionamento 1:N com Sale_Items.
+        Sales possui um relacionamento 1:N com Sale_Items.
+
+Pronto! Agora é só você transferir essas informações para o seu diagrama ER.
