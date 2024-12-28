@@ -47,10 +47,10 @@ const PDVView = () => {
                       <td>{item.quantity}</td>
                       <td>R${Number(item.price).toFixed(2)}</td>
                       <td>R${(item.quantity * item.price).toFixed(2)}</td>
-                      <button
+                      <td><button
                       onClick={() => removeFromCart(item.id)}
                       
-                      ><RiSubtractFill /></button>
+                      ><RiSubtractFill /></button></td>
                     </tr>
                   ))}
                 </tbody>
