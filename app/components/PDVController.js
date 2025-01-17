@@ -70,7 +70,12 @@ export const PDVController = () => {
   };
 
   // Captura os Id's de cada item no carrinho 
-  //const itensID = cart.map(cart => cart.id);
+  const capturarIds = () => {
+    const ids = cart.map((item) => item.id);
+    console.log(capturarIds)
+  };
+ 
+
 
   // Remover item do carrinho
   const removeFromCart = (productId) => {

@@ -22,6 +22,14 @@ const PDVView = () => {
     totalWithDiscount,
   } = PDVController();
   //testar array do CArrinho
+  
+  const capturarIds = () => {
+    const ids = cart.map((item) => item.id);
+    console.log(ids)
+  };
+
+  console.log(capturarIds())
+
   console.log(`este é o array: ${JSON.stringify(cart)}`)
 
   const [discountInput, setDiscountInput] = useState("");
