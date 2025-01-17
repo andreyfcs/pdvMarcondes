@@ -21,16 +21,20 @@ const PDVView = () => {
     applyDiscount,
     totalWithDiscount,
   } = PDVController();
+  //testar array do CArrinho
+  console.log(`este é o array: ${JSON.stringify(cart)}`)
 
   const [discountInput, setDiscountInput] = useState("");
-
+ 
   return (
+    
     <div className="bg-[#8aaaaa] flex flex-wrap justify-center space-y-4 lg:space-y-0 h-screen border-2 border-blue-600">
       {/* Div do Carrinho */}
       <div className="w-full lg:w-[48%]">
         <div className="h-72 border-2 border-[#1b303b] overflow-y-auto p-4 mt-4 lg:mr-5">
           {cart.length > 0 ? (
             <div>
+              
               <table className="w-full">
                 <thead>
                   <tr>
@@ -49,11 +53,10 @@ const PDVView = () => {
                       <td>R${(item.quantity * item.price).toFixed(2)}</td>
                       <td><button
                       onClick={() => removeFromCart(item.id)}
-                      
                       ><RiSubtractFill /></button></td>
                     </tr>
                   ))}
-                </tbody>
+                  </tbody>
               </table>
             </div>
           ) : (
@@ -91,6 +94,7 @@ const PDVView = () => {
             Aplicar Desconto
           </button>
         </div>
+        
       </div>
 
       {/* Div dos Produtos Disponíveis */}

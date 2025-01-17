@@ -5,7 +5,7 @@ import db from '../../lib/db';  // Verifique o caminho correto
 // REQUISIÇÃO GET >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     export async function GET(req) {
       try {
-        // Consulta a tablea products no banco de dados "marcondes"
+        // Consulta a tablea sales no banco de dados "marcondes"
         const [products] = await db.query('SELECT * FROM sales');
         //Retorna o conteúdo da tabela como resposta
         return NextResponse.json(products, { status: 200 });

@@ -69,6 +69,9 @@ export const PDVController = () => {
     setCart([...cart, { ...product, quantity: 1 }]);
   };
 
+  // Captura os Id's de cada item no carrinho 
+  //const itensID = cart.map(cart => cart.id);
+
   // Remover item do carrinho
   const removeFromCart = (productId) => {
     setCart((prevCart) => {

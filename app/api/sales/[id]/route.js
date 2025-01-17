@@ -2,29 +2,30 @@ import { NextResponse } from 'next/server';
 import db from '../../../lib/db'; // Verifique o caminho correto
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-// GET: Obter um produto específico pelo ID>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// GET: Obter uma venda específico pelo ID>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 export async function GET(req, { params }) {
+  //criar const products, const sale_items
   try {
     const { id } = params; // Extrai o ID dos parâmetros da rota
     const [sales] = await db.query('SELECT * FROM sales WHERE id = ?', [id]);
 
     if (sales.length === 0) {
       return NextResponse.json(
-        { message: 'Produto não encontrado' },
+        { message: 'Venda não encontrado' },
         { status: 404 });
     }
 
     return NextResponse.json(sales[0], { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { message: 'Erro ao buscar o produto', error: error.message },
+      { message: 'Erro ao buscar venda', error: error.message },
       { status: 500 }
     );
   }
 }//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-// PUT: Atualizar um produto específico pelo ID>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// PUT: Atualizar uma venda específica pelo ID>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 export async function PUT(req, { params }) {
   try {
     const { id } = params; // Extrai o ID dos parâmetros da rota
