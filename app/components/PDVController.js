@@ -71,8 +71,9 @@ export const PDVController = () => {
 
   // Captura os Id's de cada item no carrinho 
   const capturarIds = () => {
-    const ids = cart.map((item) => item.id);
-    console.log(capturarIds)
+    const ids = cart.map((item) => item.name);
+    console.log(ids)
+    return ids
   };
  
 

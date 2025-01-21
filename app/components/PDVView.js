@@ -27,10 +27,11 @@ const PDVView = () => {
     const ids = cart.map((item) => item.id);
     console.log(ids)
   };
+  
 
-  console.log(capturarIds())
+  console.log('este é a funcao que capturaids', capturarIds())
 
-  console.log(`este é o array: ${JSON.stringify(cart)}`)
+  console.log(`este é o array detalhado: ${JSON.stringify(cart)}`)
 
   const [discountInput, setDiscountInput] = useState("");
  
