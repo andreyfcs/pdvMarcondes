@@ -15,13 +15,16 @@ export async function GET (req) {
 export async function POST(req) {
     try {
         const body = await req.json();
-        let { sale}
-        return (
+        let { sale, product, quantity, price, subtotal = 0 } = body;
+        if ( sale || product || quantity || price || subtotal === null) {
+        return NextResponse.json (
+            { message: 'Campos Obrigatorios estão faltando'},
+            { status: 400 }
+        );
+    }
 
-        )
-
-    } catch (error) {
-        return (
+    } catch (error) {   
+        return NextResponse.json(
 
         )
     } }

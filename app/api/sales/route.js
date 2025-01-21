@@ -22,9 +22,9 @@ import db from '../../lib/db';  // Verifique o caminho correto
   export async function POST(req) {
     try {
       // 1. Extraia os dados da requisição
-      const body = await req.json(); // Pega o corpo da requisição
-       
-  
+        const body = await req.json(); // Pega o corpo da requisição
+        
+    
       // 2. Valide os dados
       let { sale_date, total  = 0 } = body;
       if (total == null) {

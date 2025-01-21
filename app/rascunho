@@ -5,4 +5,4 @@
   `product_id` int NOT NULL,
   `quantity` int NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `subtotal` decimal(10,2) GENERATED ALWAYS AS ((`quantity` * `price`)) STORED,
+  `subtotal` decimal(10,2) GENERATED ALWAYS AS ((`quantity` * `price`)) STORED,NextResponsive.js
