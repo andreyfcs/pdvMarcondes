@@ -1,5 +1,4 @@
 <h2>Marcondes Barbearia<h1></h2>
-##
   
 <h3>Descrição:</h3>
 ##
@@ -16,7 +15,7 @@ Sistema de gestão
 <li>Gestão de Clientes</li>
 <li>Gestão de tempo de produção</li>
 </ul>
-##
+
 <h3>Tecnologias:</h3>
 ##
 <ul>
