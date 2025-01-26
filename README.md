@@ -16,5 +16,5 @@ Tecnologias:
 
 Next
 Node
-Mysql
+MySQL
 TailwindCSS
