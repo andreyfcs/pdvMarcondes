@@ -1,12 +1,12 @@
 <h2>Marcondes Barbearia<h1></h2>
   
 <h3>Descrição:</h3>
-##
+
   
 Sistema de gestão
 
 <h3>Funcionalidades:</h3>
-##
+
   
 <ul>
 <li>Frente de Caixa</li>
