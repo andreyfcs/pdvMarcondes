@@ -1,10 +1,10 @@
 <h2>Marcondes Barbearia<h1></h2>
-
-Descrição:
 ##
+<h3>Descrição:
+
 Sistema de gestão
 ##
-Funcionalidades:
+<h3>Funcionalidades:
 ##
 <ul>
 <li>Frente de Caixa</li>
@@ -14,9 +14,11 @@ Funcionalidades:
 <li>Gestão de tempo de produção</li>
 </ul>
 ##
-Tecnologias:
+<h3>Tecnologias:
 ##
-Next
-Node
-Mysql
-TailwindCSS
+<ul>
+<li>Next</li>
+<li>Node</li>
+<li>Mysql</li>
+<li>TailwindCSS</li>
+</ul>
