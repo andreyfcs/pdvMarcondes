@@ -1,17 +1,19 @@
-<h1>Marcondes Barbearia<h1></h1>
+<h2>Marcondes Barbearia<h1></h2>
 
 Descrição:
 
 Sistema de gestão
 
 Funcionalidades:
+
 <ul>
-Frente de Caixa
-Controle de Estoque
-Gestão de Vendas
-Gestão de Clientes
-Gestão de tempo de produção
+<li>Frente de Caixa</li>
+<li>Controle de Estoque</li>
+<li>Gestão de Vendas</li>
+<li>Gestão de Clientes</li>
+<li>Gestão de tempo de produção</li>
 </ul>
+
 Tecnologias:
 
 Next
