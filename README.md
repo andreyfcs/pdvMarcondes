@@ -1,20 +1,27 @@
-Marcondes Barbearia
+## Marcondes Barbearia
 
-Descrição:
+### Descrição:
 
 Sistema de gestão
 
-Funcionalidades:
+### Funcionalidades:
 
-Frente de Caixa
-Controle de Estoque
-Gestão de Vendas
-Gestão de Clientes
-Gestão de tempo de produção
+- Frente de Caixa
+- Controle de Estoque
+- Gestão de Vendas
+- Gestão de Clientes
+- Gestão de tempo de produção
 
-Tecnologias:
+### Tecnologias:
 
+<<<<<<< HEAD
 Next
 Node
 MySQL
 TailwindCSS
+=======
+- Next
+- Node
+- MySQL
+- TailwindCSS
+>>>>>>> 763eca63e5195ded528479b8870ca8073f839fc5
